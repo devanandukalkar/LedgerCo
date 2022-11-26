@@ -1,5 +1,8 @@
 package com.geektrust.ledgerco;
 
+import com.geektrust.ledgerco.commands.CommandInvoker;
+import com.geektrust.ledgerco.config.Configuration;
+import com.geektrust.ledgerco.exceptions.CommandNotFoundException;
 import org.junit.jupiter.api.*;
 
 import java.io.ByteArrayOutputStream;
@@ -14,6 +17,17 @@ class AppTest {
     @BeforeEach
     public void setup() {
         System.setOut(new PrintStream(outputStreamCaptor));
+    }
+
+    @Test
+    @DisplayName("Invalid Command Test")
+    void invalidCommandTest() {
+        // Arrange
+        Configuration configurationTest = Configuration.getInstance();
+        CommandInvoker commandInvokerTest = configurationTest.getCommandInvoker();
+
+        // Act
+        Assertions.assertThrows(CommandNotFoundException.class, () -> commandInvokerTest.invokeCommand("INVALID_COMMAND_TEST"));
     }
 
     @Test

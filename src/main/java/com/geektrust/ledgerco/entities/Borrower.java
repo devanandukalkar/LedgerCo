@@ -3,6 +3,7 @@ package com.geektrust.ledgerco.entities;
 public class Borrower {
     private final String borrowerName;
     private final Loan borrowerLoan;
+    private LumpSumPayment lumpSumPayment;
 
     public Borrower(String borrowerName, Loan borrowerLoan) {
         this.borrowerName = borrowerName;
@@ -15,6 +16,14 @@ public class Borrower {
 
     public Loan getBorrowerLoan() {
         return borrowerLoan;
+    }
+
+    public LumpSumPayment getLumpSumPayment() {
+        return lumpSumPayment;
+    }
+
+    public void setLumpSumPayment(LumpSumPayment lumpSumPayment) {
+        this.lumpSumPayment = lumpSumPayment;
     }
 
     @Override

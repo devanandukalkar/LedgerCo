@@ -18,9 +18,4 @@ public class LoanServiceImpl implements ILoanService {
         Loan loan = new Loan(bankName, principal, years, interestRate);
         return loanRepository.save(loan);
     }
-
-    @Override
-    public Loan getLoanById(Integer loanId) {
-        return loanRepository.findById(loanId);
-    }
 }
