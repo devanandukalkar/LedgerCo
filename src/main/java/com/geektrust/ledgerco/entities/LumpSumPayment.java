@@ -1,15 +1,15 @@
 package com.geektrust.ledgerco.entities;
 
 public class LumpSumPayment {
-    private final Integer paymentAmount;
+    private final Double paymentAmount;
     private final Integer emiPaidTillPayment;
 
-    public LumpSumPayment(Integer paymentAmount, Integer emiPaidTillPayment) {
+    public LumpSumPayment(Double paymentAmount, Integer emiPaidTillPayment) {
         this.paymentAmount = paymentAmount;
         this.emiPaidTillPayment = emiPaidTillPayment;
     }
 
-    public Integer getPaymentAmount() {
+    public Double getPaymentAmount() {
         return paymentAmount;
     }
 
@@ -18,6 +18,9 @@ public class LumpSumPayment {
     }
 
     public int getNumberOfEmiReducedForLumpSumPayment(int emiPerMonth) {
-        return paymentAmount/emiPerMonth;
+//        System.out.println(paymentAmount);
+//        System.out.println(emiPerMonth);
+//        System.out.println(Math.round(paymentAmount/emiPerMonth));
+        return (int) Math.round(paymentAmount/emiPerMonth);
     }
 }

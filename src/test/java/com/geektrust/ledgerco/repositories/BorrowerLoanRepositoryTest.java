@@ -22,9 +22,15 @@ class BorrowerLoanRepositoryTest {
 
     @BeforeEach
     void setup() {
-        Loan loan = new Loan(1, "IDIDI", 10000.00, 5, 4.0);
+        int loanId = 1;
+        double loanPrincipal = 10000.00;
+        int loanTenureInYears = 5;
+        double loanInterestRate = 4.0;
+
+        Loan loan = new Loan(loanId, "IDIDI", loanPrincipal, loanTenureInYears, loanInterestRate);
         String borrowerName = "John";
-        Borrower borrower = new Borrower(borrowerName, loan);
+        Borrower borrower = new Borrower(borrowerName);
+        borrower.addBorrowerLoan(loan);
         Map<String, Borrower> testBorrowerMap = new HashMap<String, Borrower>() {
             {
                 put(borrowerName, borrower);
@@ -45,16 +51,25 @@ class BorrowerLoanRepositoryTest {
     @DisplayName("Save Borrower & Loan method should create Loan & Borrower and return borrower object")
     void saveBorrowerLoanRepositoryTest() {
         // Arrange
-        Loan loan = new Loan(2, "MBI", 20000.00, 5, 4.0);
-        Borrower expectedOutput = new Borrower("Jane", loan);
+        int loanId = 2;
+        double loanPrincipal = 20000.00;
+        int loanTenureInYears = 5;
+        double loanInterestRate = 4.0;
+
+        Loan loan = new Loan(loanId, "MBI", loanPrincipal, loanTenureInYears, loanInterestRate);
+        Borrower expectedBorrower = new Borrower("Jane");
+        expectedBorrower.addBorrowerLoan(loan);
 
         // Act
-        loanRepository.save(new Loan("MBI", 20000.00, 5, 4.0));
-        borrowerRepository.save(new Borrower("Jane", loan));
+        loanRepository.save(new Loan(loanId, "MBI", loanPrincipal, loanTenureInYears, loanInterestRate));
+        Borrower actualBorrower = new Borrower("Jane");
+        actualBorrower.addBorrowerLoan(loanRepository.findById(loanId));
+        borrowerRepository.save(actualBorrower);
+
         Borrower actualOutput = borrowerRepository.findByName("Jane");
 
         // Assert
-        Assertions.assertTrue((expectedOutput.getBorrowerName().equals(actualOutput.getBorrowerName()))
-                && (expectedOutput.getBorrowerLoan().getLoanId().equals(actualOutput.getBorrowerLoan().getLoanId())));
+        Assertions.assertTrue((expectedBorrower.getBorrowerName().equals(actualOutput.getBorrowerName()))
+                && (expectedBorrower.getBorrowerLoans().size() == actualOutput.getBorrowerLoans().size()));
     }
 }

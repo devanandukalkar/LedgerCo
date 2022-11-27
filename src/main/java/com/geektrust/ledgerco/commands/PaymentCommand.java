@@ -16,9 +16,9 @@ public class PaymentCommand implements ICommand {
     public void execute(List<String> tokens) {
         String bankName = tokens.get(1);
         String borrowerName = tokens.get(2);
-        Integer payment = Integer.valueOf(tokens.get(3));
+        Double payment = Double.valueOf(tokens.get(3));
         Integer emiPaidTillPayment = Integer.valueOf(tokens.get(4));
 
-        paymentService.savePaymentToBorrowerAccount(bankName, borrowerName, payment, emiPaidTillPayment);
+        paymentService.savePaymentToBorrowerLoanAccount(bankName, borrowerName, payment, emiPaidTillPayment);
     }
 }

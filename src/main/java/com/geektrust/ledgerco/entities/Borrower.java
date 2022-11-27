@@ -1,36 +1,47 @@
 package com.geektrust.ledgerco.entities;
 
-public class Borrower {
-    private final String borrowerName;
-    private final Loan borrowerLoan;
-    private LumpSumPayment lumpSumPayment;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
-    public Borrower(String borrowerName, Loan borrowerLoan) {
+public class Borrower {
+    private String borrowerName;
+    private Set<Loan> borrowerLoans;
+
+    public Borrower() {
+    }
+
+    public Borrower(String borrowerName) {
         this.borrowerName = borrowerName;
-        this.borrowerLoan = borrowerLoan;
+        this.borrowerLoans = new HashSet<>();
     }
 
     public String getBorrowerName() {
         return borrowerName;
     }
 
-    public Loan getBorrowerLoan() {
-        return borrowerLoan;
+    public Set<Loan> getBorrowerLoans() {
+        return borrowerLoans;
     }
 
-    public LumpSumPayment getLumpSumPayment() {
-        return lumpSumPayment;
+    public void addBorrowerLoan(Loan loan) {
+        borrowerLoans.add(loan);
     }
 
-    public void setLumpSumPayment(LumpSumPayment lumpSumPayment) {
-        this.lumpSumPayment = lumpSumPayment;
+    public Loan getBorrowerLoanByBank(String bankName) {
+        Optional<Loan> loanByBank = borrowerLoans.stream().filter(loan -> loan.getLoanBank().equals(bankName)).findAny();
+
+        if (!loanByBank.isPresent())
+            throw new RuntimeException("Loan not found!");
+
+        return loanByBank.get();
     }
 
     @Override
     public String toString() {
         return "Borrower{" +
                 "borrowerName='" + borrowerName + '\'' +
-                ", borrowerLoan=" + borrowerLoan +
+                ", borrowerLoan=" + borrowerLoans +
                 '}';
     }
 }

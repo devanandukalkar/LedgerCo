@@ -5,6 +5,7 @@ import com.geektrust.ledgerco.repositories.IBorrowerRepository;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 public class BorrowerRepositoryImpl implements IBorrowerRepository {
 
@@ -27,6 +28,7 @@ public class BorrowerRepositoryImpl implements IBorrowerRepository {
 
     @Override
     public Borrower findByName(String name) {
-        return borrowerMap.values().stream().filter(borrower -> borrower.getBorrowerName().equals(name)).findAny().get();
+        Optional<Borrower> optionalBorrower = borrowerMap.values().stream().filter(borrower -> borrower.getBorrowerName().equals(name)).findAny();
+        return optionalBorrower.orElseGet(Borrower::new);
     }
 }

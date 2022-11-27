@@ -6,6 +6,7 @@ public class Loan {
     private final Double loanPrincipal;
     private final Integer loanTenureInYears;
     private final Double loanInterestRate;
+    private LumpSumPayment lumpSumPayment;
 
     public Loan(Integer loanId, String loanBank, Double loanPrincipal, Integer loanTenureInYears, Double loanInterestRate) {
         this.loanId = loanId;
@@ -39,13 +40,22 @@ public class Loan {
         return loanInterestRate;
     }
 
-    private Double getTotalLoanAmount() {
+    public LumpSumPayment getLumpSumPayment() {
+        return lumpSumPayment;
+    }
+
+    public void setLumpSumPayment(LumpSumPayment lumpSumPayment) {
+        this.lumpSumPayment = lumpSumPayment;
+    }
+
+    public Double getTotalLoanAmount() {
         Double interestOnLoan = this.loanPrincipal * this.loanTenureInYears * (this.loanInterestRate / 100);
         return this.loanPrincipal + interestOnLoan;
     }
 
     public int getTotalEMIs() {
-        return this.getLoanTenureInYears() * 12;
+        int monthsInYear = 12;
+        return this.getLoanTenureInYears() * monthsInYear;
     }
 
     public int getEMIPerMonth() {

@@ -11,7 +11,13 @@ class LumpSumPaymentTest {
     @DisplayName("Save Lump sum payment test")
     @Test
     void saveLumpSumPaymentTest() {
-        LumpSumPayment lumpSumPaymentTest = new LumpSumPayment(1000, 4);
-        assertEquals(2, lumpSumPaymentTest.getNumberOfEmiReducedForLumpSumPayment(500));
+        double paymentAmount = 1000.00;
+        int emiPaidTillPayment = 4;
+        int emiPerMonth = 500;
+
+        LumpSumPayment lumpSumPaymentTest = new LumpSumPayment(paymentAmount, emiPaidTillPayment);
+
+        int expectedOutput = 2;
+        assertEquals(expectedOutput, lumpSumPaymentTest.getNumberOfEmiReducedForLumpSumPayment(emiPerMonth));
     }
 }

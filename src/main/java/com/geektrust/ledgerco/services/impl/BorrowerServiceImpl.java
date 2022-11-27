@@ -5,6 +5,8 @@ import com.geektrust.ledgerco.entities.Loan;
 import com.geektrust.ledgerco.repositories.IBorrowerRepository;
 import com.geektrust.ledgerco.services.IBorrowerService;
 
+import java.util.Optional;
+
 public class BorrowerServiceImpl implements IBorrowerService {
 
     private final IBorrowerRepository borrowerRepository;
@@ -15,7 +17,12 @@ public class BorrowerServiceImpl implements IBorrowerService {
 
     @Override
     public Borrower saveBorrower(String borrowerName, Loan borrowerLoan) {
-        Borrower borrower = new Borrower(borrowerName, borrowerLoan);
+        // Check if borrower is already present in the repository
+        Borrower borrower = findBorrowerByName(borrowerName);
+        if (borrower.getBorrowerName() == null)
+            borrower = new Borrower(borrowerName);
+
+        borrower.addBorrowerLoan(borrowerLoan);
         return borrowerRepository.save(borrower);
     }
 
