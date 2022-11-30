@@ -20,10 +20,6 @@ public class Loan {
         this(null, loanBank, loanPrincipal, loanTenureInYears, loanInterestRate);
     }
 
-    public Integer getLoanId() {
-        return loanId;
-    }
-
     public String getLoanBank() {
         return loanBank;
     }
