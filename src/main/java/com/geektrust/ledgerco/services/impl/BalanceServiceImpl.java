@@ -34,11 +34,9 @@ public class BalanceServiceImpl implements IBalanceService {
             amountPaid = emiPerMonth * (double) emiNumber;
             emiRemaining = totalLoanEmi - emiNumber;
         } else {
-//            System.out.println("emiPerMonth:" + emiPerMonth);
-//            System.out.println("emiNumber:" + emiNumber);
-//            System.out.println("withoutpayment:" +(emiPerMonth * emiNumber));
+
             amountPaid = (emiPerMonth * emiNumber) + lumpSumPayment.getPaymentAmount();
-            emiRemaining = totalLoanEmi - (lumpSumPayment.getNumberOfEmiReducedForLumpSumPayment(emiPerMonth) + emiNumber);
+            emiRemaining = (int)Math.ceil((loan.getTotalLoanAmount() - amountPaid) / emiPerMonth);
             // Override amountPaid with TotalLoanAmount if emiRemaining is zero
             int zeroEmiPending = 0;
             if (emiRemaining == zeroEmiPending)
