@@ -5,8 +5,6 @@ import com.geektrust.ledgerco.entities.Loan;
 import com.geektrust.ledgerco.repositories.IBorrowerRepository;
 import com.geektrust.ledgerco.services.IBorrowerService;
 
-import java.util.Optional;
-
 public class BorrowerServiceImpl implements IBorrowerService {
 
     private final IBorrowerRepository borrowerRepository;

@@ -8,7 +8,7 @@ public enum CommandKeyword {
 
     private final String name;
 
-    CommandKeyword(String name) {
+    private CommandKeyword(String name) {
         this.name = name;
     }
 

@@ -24,7 +24,7 @@ public class App {
             // returns true if there is another line to read
             String line;
             while (sc.hasNextLine()) {
-               //Add your code here to process input commands
+                //Add your code here to process input commands
                 line = sc.nextLine();
                 commandInvoker.invokeCommand(line);
             }

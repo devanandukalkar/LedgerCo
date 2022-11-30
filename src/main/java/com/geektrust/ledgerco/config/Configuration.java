@@ -25,11 +25,11 @@ public class Configuration {
     private final ILoanService loanService = new LoanServiceImpl(loanRepository);
     private final IBorrowerService borrowerService = new BorrowerServiceImpl(borrowerRepository);
     private final IBalanceService balanceService = new BalanceServiceImpl(borrowerService);
+    private final BalanceCommand balanceCommand = new BalanceCommand(balanceService);
     private final IPaymentService paymentService = new PaymentServiceImpl(borrowerService);
+    private final PaymentCommand paymentCommand = new PaymentCommand(paymentService);
     // Initialize all commands
     private final LoanCommand loanCommand = new LoanCommand(borrowerService, loanService);
-    private final BalanceCommand balanceCommand = new BalanceCommand(balanceService);
-    private final PaymentCommand paymentCommand = new PaymentCommand(paymentService);
     // Initialize command Invoker
     private final CommandInvoker commandInvoker = new CommandInvoker();
 

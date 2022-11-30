@@ -18,9 +18,6 @@ public class LumpSumPayment {
     }
 
     public int getNumberOfEmiReducedForLumpSumPayment(int emiPerMonth) {
-//        System.out.println(paymentAmount);
-//        System.out.println(emiPerMonth);
-//        System.out.println(Math.round(paymentAmount/emiPerMonth));
-        return (int) Math.round(paymentAmount/emiPerMonth);
+        return (int) Math.round(paymentAmount / emiPerMonth);
     }
 }

@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- CommandInvoker.java is used to register a command coming from Configuration.java
- and encapsulate incoming command request.
+ * CommandInvoker.java is used to register a command coming from Configuration.java
+ * and encapsulate incoming command request.
  */
 public class CommandInvoker {
 
