@@ -39,7 +39,7 @@ class BorrowerLoanRepositoryTest {
 
         Map<Integer, Loan> testLoanMap = new HashMap<Integer, Loan>() {
             {
-                put(1, loan);
+                put(loanId, loan);
             }
         };
 

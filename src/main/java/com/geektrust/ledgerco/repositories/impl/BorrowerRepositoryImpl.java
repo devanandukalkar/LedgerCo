@@ -1,6 +1,7 @@
 package com.geektrust.ledgerco.repositories.impl;
 
 import com.geektrust.ledgerco.entities.Borrower;
+import com.geektrust.ledgerco.exceptions.BorrowerNotFoundException;
 import com.geektrust.ledgerco.repositories.IBorrowerRepository;
 
 import java.util.HashMap;
@@ -29,6 +30,9 @@ public class BorrowerRepositoryImpl implements IBorrowerRepository {
     @Override
     public Borrower findByName(String name) {
         Optional<Borrower> optionalBorrower = borrowerMap.values().stream().filter(borrower -> borrower.getBorrowerName().equals(name)).findAny();
-        return optionalBorrower.orElseGet(Borrower::new);
+        if (optionalBorrower.isPresent())
+            return optionalBorrower.get();
+
+        throw new BorrowerNotFoundException("Expense ID not found in database!");
     }
 }

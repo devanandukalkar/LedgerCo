@@ -2,6 +2,7 @@ package com.geektrust.ledgerco.services.impl;
 
 import com.geektrust.ledgerco.entities.Borrower;
 import com.geektrust.ledgerco.entities.Loan;
+import com.geektrust.ledgerco.exceptions.BorrowerNotFoundException;
 import com.geektrust.ledgerco.repositories.IBorrowerRepository;
 import com.geektrust.ledgerco.services.IBorrowerService;
 
@@ -16,9 +17,12 @@ public class BorrowerServiceImpl implements IBorrowerService {
     @Override
     public Borrower saveBorrower(String borrowerName, Loan borrowerLoan) {
         // Check if borrower is already present in the repository
-        Borrower borrower = findBorrowerByName(borrowerName);
-        if (borrower.getBorrowerName() == null)
+        Borrower borrower;
+        try {
+            borrower = findBorrowerByName(borrowerName);
+        } catch (BorrowerNotFoundException e) {
             borrower = new Borrower(borrowerName);
+        }
 
         borrower.addBorrowerLoan(borrowerLoan);
         return borrowerRepository.save(borrower);

@@ -5,11 +5,8 @@ import java.util.Optional;
 import java.util.Set;
 
 public class Borrower {
-    private String borrowerName;
-    private Set<Loan> borrowerLoans;
-
-    public Borrower() {
-    }
+    private final String borrowerName;
+    private final Set<Loan> borrowerLoans;
 
     public Borrower(String borrowerName) {
         this.borrowerName = borrowerName;
